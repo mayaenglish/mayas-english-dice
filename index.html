@@ -3,54 +3,155 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Maya's English Dice</title>
 
 <style>
-*{box-sizing:border-box}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:linear-gradient(135deg,#eef2ff,#f8fafc);
-    color:#172033;
     min-height:100vh;
+    font-family:'Inter',Arial,sans-serif;
+    color:#172033;
+
+    background:
+        radial-gradient(circle at top left,#dbeafe 0%,transparent 32%),
+        radial-gradient(circle at bottom right,#ede9fe 0%,transparent 30%),
+        #f8fafc;
 }
+
+/* =========================
+   MAIN CONTAINER
+========================= */
 
 .container{
-    max-width:1250px;
+    max-width:1350px;
     margin:auto;
-    padding:28px 20px 40px;
-    text-align:center;
+    padding:30px 24px 45px;
 }
 
-.title{
-    font-size:clamp(32px,5vw,60px);
-    font-weight:900;
-    margin-bottom:4px;
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:28px;
 }
 
-.subtitle{
-    font-size:clamp(16px,2vw,21px);
-    color:#64748b;
-    margin-bottom:22px;
+.brand{
+    display:flex;
+    align-items:center;
+    gap:16px;
 }
 
-.topbar{
-    background:white;
-    padding:16px;
+.logo{
+    width:64px;
+    height:64px;
     border-radius:20px;
-    box-shadow:0 8px 22px rgba(0,0,0,.07);
-    margin-bottom:20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:32px;
+
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+    color:white;
+
+    box-shadow:
+        0 12px 30px rgba(79,70,229,.25);
+}
+
+.brand h1{
+    margin:0;
+    font-size:clamp(28px,4vw,48px);
+    font-weight:900;
+    letter-spacing:-1.5px;
+}
+
+.brand p{
+    margin:4px 0 0;
+    color:#64748b;
+    font-size:15px;
+    font-weight:600;
+}
+
+.badge{
+    padding:10px 16px;
+    border-radius:999px;
+
+    background:white;
+    border:1px solid #e2e8f0;
+
+    font-size:13px;
+    font-weight:800;
+    color:#4f46e5;
+
+    box-shadow:0 5px 15px rgba(15,23,42,.06);
+}
+
+/* =========================
+   CONTROL BAR
+========================= */
+
+.control-bar{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+
+    background:rgba(255,255,255,.85);
+    backdrop-filter:blur(12px);
+
+    border:1px solid #e2e8f0;
+    border-radius:20px;
+
+    padding:15px 20px;
+    margin-bottom:22px;
+
+    box-shadow:0 10px 30px rgba(15,23,42,.06);
+}
+
+.control-label{
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:1px;
+    color:#64748b;
 }
 
 select{
     padding:11px 18px;
-    border:2px solid #dbe3ee;
+
+    border:2px solid #e2e8f0;
     border-radius:12px;
-    font-size:17px;
-    font-weight:700;
-    margin-left:8px;
+
+    background:white;
+
+    font-size:16px;
+    font-weight:800;
+    color:#172033;
+
+    outline:none;
+    cursor:pointer;
 }
+
+select:focus{
+    border-color:#6366f1;
+}
+
+/* =========================
+   DICE AREA
+========================= */
 
 .dice-container{
     display:grid;
@@ -59,192 +160,454 @@ select{
 }
 
 .dice{
-    background:white;
-    border:3px solid #dbe3ee;
-    border-radius:25px;
-    min-height:190px;
-    padding:25px 15px;
+    position:relative;
+
+    min-height:220px;
+
+    background:rgba(255,255,255,.94);
+
+    border:1px solid #e2e8f0;
+    border-radius:28px;
+
+    padding:28px 20px;
+
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    overflow:hidden;
+
+    box-shadow:
+        0 18px 40px rgba(15,23,42,.08);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.dice:hover{
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 24px 50px rgba(15,23,42,.12);
+}
+
+.dice::before{
+    content:"";
+
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+
+    height:5px;
+
+    background:linear-gradient(
+        90deg,
+        #4f46e5,
+        #7c3aed
+    );
+}
+
+.dice:nth-child(2)::before{
+    background:linear-gradient(
+        90deg,
+        #7c3aed,
+        #db2777
+    );
+}
+
+.dice:nth-child(3)::before{
+    background:linear-gradient(
+        90deg,
+        #2563eb,
+        #0891b2
+    );
 }
 
 .label{
-    font-size:14px;
+    font-size:12px;
     font-weight:900;
     letter-spacing:2px;
-    color:#64748b;
     text-transform:uppercase;
-    margin-bottom:14px;
+
+    color:#64748b;
+
+    margin-bottom:15px;
 }
 
 .word{
-    font-size:clamp(25px,4vw,46px);
+    font-size:clamp(28px,4vw,48px);
     font-weight:900;
+
     line-height:1.15;
+    text-align:center;
+
+    color:#172033;
+
+    word-break:break-word;
 }
 
 .rolling{
-    animation:shake .12s infinite alternate;
+    animation:shake .1s infinite alternate;
 }
 
 @keyframes shake{
-    from{transform:rotate(-4deg) scale(.98)}
-    to{transform:rotate(4deg) scale(1.03)}
+
+    from{
+        transform:rotate(-3deg) scale(.98);
+    }
+
+    to{
+        transform:rotate(3deg) scale(1.03);
+    }
 }
 
+/* =========================
+   BUTTONS
+========================= */
+
 .buttons{
-    margin:22px 0;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+
+    gap:8px;
+
+    margin:24px 0;
 }
 
 button{
     border:none;
-    border-radius:15px;
-    padding:13px 20px;
-    margin:5px;
-    font-size:16px;
+    border-radius:13px;
+
+    padding:12px 18px;
+
+    font-family:inherit;
+    font-size:15px;
     font-weight:800;
+
     cursor:pointer;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+button:active{
+    transform:translateY(0);
 }
 
 button:disabled{
-    opacity:.55;
+    opacity:.5;
     cursor:not-allowed;
 }
 
 .roll{
-    background:#4f46e5;
+    background:linear-gradient(
+        135deg,
+        #4f46e5,
+        #7c3aed
+    );
+
     color:white;
-    font-size:20px;
-    padding:16px 27px;
+
+    font-size:18px;
+    padding:15px 25px;
+
+    box-shadow:
+        0 10px 25px rgba(79,70,229,.25);
+}
+
+.roll:hover{
+    box-shadow:
+        0 14px 30px rgba(79,70,229,.35);
 }
 
 .secondary{
     background:white;
-    border:2px solid #dbe3ee;
-    color:#172033;
-}
+    color:#334155;
 
-.answer-buttons{
-    margin-top:10px;
-}
+    border:1px solid #dbe3ee;
 
-.answer-buttons button{
-    min-width:190px;
-}
-
-.sentence{
-    background:white;
-    border:3px solid #dbe3ee;
-    border-radius:22px;
-    padding:23px;
-    min-height:90px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:clamp(21px,3vw,34px);
-    font-weight:900;
-    margin:20px 0;
-}
-
-.challenge{
-    background:white;
-    border-radius:22px;
-    padding:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,.07);
-    margin-bottom:20px;
-}
-
-.challenge-title{
-    color:#64748b;
-    font-weight:900;
-    font-size:15px;
-    letter-spacing:1px;
-}
-
-.challenge-text{
-    font-size:clamp(21px,3vw,30px);
-    font-weight:900;
-    margin-top:8px;
-}
-
-.answer{
-    display:none;
-    margin-top:15px;
-    padding:15px;
-    border-radius:15px;
-    background:#f1f5f9;
-    font-size:clamp(18px,2.5vw,27px);
-    font-weight:800;
-}
-
-.bottom{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:18px;
-}
-
-.panel{
-    background:white;
-    border:2px solid #dbe3ee;
-    border-radius:20px;
-    padding:18px;
-}
-
-.timer{
-    font-size:45px;
-    font-weight:900;
-    margin:8px;
-}
-
-.team{
-    font-size:19px;
-    font-weight:900;
-}
-
-.score{
-    font-size:42px;
-    font-weight:900;
-    margin:5px;
+    box-shadow:
+        0 5px 14px rgba(15,23,42,.05);
 }
 
 .finish{
     background:#172033;
     color:white;
+
+    box-shadow:
+        0 8px 20px rgba(15,23,42,.15);
 }
 
-.winner{
-    display:none;
-    background:white;
+/* =========================
+   SENTENCE CARD
+========================= */
+
+.sentence-card{
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #f5f3ff
+        );
+
+    border:1px solid #c7d2fe;
+
     border-radius:25px;
-    padding:30px;
-    margin-top:22px;
-    box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+    padding:26px;
+
+    margin-bottom:22px;
+
+    text-align:center;
 }
 
-.winner h2{
-    font-size:32px;
+.sentence-label{
+    font-size:12px;
+    font-weight:900;
+
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+    color:#6366f1;
+
+    margin-bottom:10px;
+}
+
+.sentence{
+    font-size:clamp(22px,3vw,35px);
+    font-weight:900;
+
+    line-height:1.3;
+
+    min-height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* =========================
+   SPEAKING CHALLENGE
+========================= */
+
+.challenge{
+    background:white;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:25px;
+
+    padding:25px;
+
+    margin-bottom:22px;
+
+    box-shadow:
+        0 15px 35px rgba(15,23,42,.07);
+}
+
+.challenge-title{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    color:#6366f1;
+
+    font-size:13px;
+    font-weight:900;
+
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.challenge-text{
+    font-size:clamp(21px,3vw,30px);
+    font-weight:900;
+
+    text-align:center;
+
+    margin:12px 0 18px;
+}
+
+.answer{
+    display:none;
+
+    padding:16px;
+
+    border-radius:15px;
+
+    background:#f8fafc;
+
+    border:1px dashed #cbd5e1;
+
+    text-align:center;
+
+    font-size:clamp(18px,2.5vw,26px);
+    font-weight:800;
+
+    margin-bottom:15px;
+}
+
+.answer-buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+/* =========================
+   BOTTOM PANELS
+========================= */
+
+.bottom{
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        1fr;
+
+    gap:18px;
+}
+
+.panel{
+    background:white;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:22px;
+
+    padding:22px;
+
+    text-align:center;
+
+    box-shadow:
+        0 12px 28px rgba(15,23,42,.06);
+}
+
+.timer{
+    font-size:52px;
+    font-weight:900;
+
+    color:#4f46e5;
+
     margin:5px;
 }
 
-.footer{
-    margin-top:25px;
-    color:#94a3b8;
-    font-size:14px;
+.team{
+    font-size:15px;
+    font-weight:900;
+
+    letter-spacing:1px;
 }
 
-@media(max-width:800px){
-    .dice-container,
+.score{
+    font-size:48px;
+    font-weight:900;
+
+    margin:5px 0 10px;
+}
+
+.panel:nth-child(2) .score{
+    color:#2563eb;
+}
+
+.panel:nth-child(3) .score{
+    color:#dc2626;
+}
+
+/* =========================
+   FINISH CARD
+========================= */
+
+.winner{
+    display:none;
+
+    margin-top:24px;
+
+    padding:30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #faf5ff
+        );
+
+    border:1px solid #c7d2fe;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:
+        0 15px 35px rgba(79,70,229,.12);
+}
+
+.winner h2{
+    margin:0 0 10px;
+
+    font-size:32px;
+}
+
+#finalScore{
+    font-size:21px;
+    font-weight:800;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    text-align:center;
+
+    margin-top:30px;
+
+    color:#94a3b8;
+
+    font-size:13px;
+    font-weight:600;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:850px){
+
+    .header{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .brand{
+        flex-direction:column;
+    }
+
+    .dice-container{
+        grid-template-columns:1fr;
+    }
+
     .bottom{
         grid-template-columns:1fr;
     }
 
     .dice{
-        min-height:150px;
+        min-height:170px;
     }
 }
+
 </style>
 </head>
 
@@ -252,187 +615,394 @@ button:disabled{
 
 <div class="container">
 
-    <div class="title">🎲 MAYA'S ENGLISH DICE</div>
+    <!-- HEADER -->
 
-    <div class="subtitle">
-        Daily Speaking Challenge
-    </div>
+    <header class="header">
 
-    <div class="topbar">
-        <strong>TENSE:</strong>
+        <div class="brand">
+
+            <div class="logo">
+                🎲
+            </div>
+
+            <div>
+
+                <h1>
+                    MAYA'S ENGLISH DICE
+                </h1>
+
+                <p>
+                    Daily Speaking Challenge
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="badge">
+            CLASSROOM EDITION
+        </div>
+
+    </header>
+
+
+    <!-- TENSE -->
+
+    <div class="control-bar">
+
+        <span class="control-label">
+            CHOOSE TENSE
+        </span>
 
         <select id="tense">
-            <option value="present">Simple Present</option>
-            <option value="past">Simple Past</option>
-            <option value="future">Simple Future</option>
+
+            <option value="present">
+                Simple Present
+            </option>
+
+            <option value="past">
+                Simple Past
+            </option>
+
+            <option value="future">
+                Simple Future
+            </option>
+
         </select>
+
     </div>
+
+
+    <!-- DICE -->
 
     <div class="dice-container">
 
-        <div class="dice" id="diceSubject">
-            <div class="label">Subject</div>
-            <div class="word" id="subject">?</div>
+        <div class="dice">
+
+            <div class="label">
+                Subject
+            </div>
+
+            <div
+                class="word"
+                id="subject">
+                ?
+            </div>
+
         </div>
 
-        <div class="dice" id="diceVerb">
-            <div class="label">Verb</div>
-            <div class="word" id="verb">?</div>
+
+        <div class="dice">
+
+            <div class="label">
+                Verb
+            </div>
+
+            <div
+                class="word"
+                id="verb">
+                ?
+            </div>
+
         </div>
 
-        <div class="dice" id="diceActivity">
-            <div class="label">Daily Activity</div>
-            <div class="word" id="activity">?</div>
+
+        <div class="dice">
+
+            <div class="label">
+                Daily Activity
+            </div>
+
+            <div
+                class="word"
+                id="activity">
+                ?
+            </div>
+
         </div>
 
     </div>
+
+
+    <!-- BUTTONS -->
 
     <div class="buttons">
 
-        <button class="roll" id="rollButton">
+        <button
+            class="roll"
+            id="rollButton">
+
             🎲 ROLL THE DICE
+
         </button>
 
-        <button class="secondary" id="timerButton">
+
+        <button
+            class="secondary"
+            id="timerButton">
+
             ⏱️ START 30s
+
         </button>
 
-        <button class="secondary" id="resetButton">
+
+        <button
+            class="secondary"
+            id="resetButton">
+
             🔄 RESET
+
         </button>
 
-        <button class="finish" id="finishButton">
+
+        <button
+            class="finish"
+            id="finishButton">
+
             🏁 FINISH GAME
+
         </button>
 
     </div>
 
-    <div class="sentence" id="sentence">
-        Roll the dice and make a complete sentence!
+
+    <!-- SENTENCE -->
+
+    <div class="sentence-card">
+
+        <div class="sentence-label">
+
+            YOUR SENTENCE
+
+        </div>
+
+        <div
+            class="sentence"
+            id="sentence">
+
+            Roll the dice and make a complete sentence!
+
+        </div>
+
     </div>
+
+
+    <!-- CHALLENGE -->
 
     <div class="challenge">
 
         <div class="challenge-title">
+
             🎤 SPEAKING CHALLENGE
+
         </div>
 
-        <div class="challenge-text" id="challenge">
+
+        <div
+            class="challenge-text"
+            id="challenge">
+
             Roll the dice to start!
+
         </div>
 
-        <div class="answer" id="answer"></div>
+
+        <div
+            class="answer"
+            id="answer">
+        </div>
+
 
         <div class="answer-buttons">
 
-            <button class="secondary" id="showAnswerButton">
+            <button
+                class="secondary"
+                id="showAnswerButton">
+
                 👀 SHOW MODEL ANSWER
+
             </button>
 
-            <button class="secondary" id="nextChallengeButton">
+
+            <button
+                class="secondary"
+                id="nextChallengeButton">
+
                 🎯 NEXT CHALLENGE
+
             </button>
 
         </div>
 
     </div>
+
+
+    <!-- SCORE -->
 
     <div class="bottom">
 
+
         <div class="panel">
 
-            <div class="label">Speaking Timer</div>
+            <div class="label">
+                Speaking Timer
+            </div>
 
-            <div class="timer" id="timer">30</div>
+            <div
+                class="timer"
+                id="timer">
+
+                30
+
+            </div>
 
         </div>
 
+
         <div class="panel">
 
-            <div class="team">🔵 TEAM A</div>
+            <div class="team">
+                🔵 TEAM A
+            </div>
 
-            <div class="score" id="scoreA">0</div>
+            <div
+                class="score"
+                id="scoreA">
 
-            <button class="secondary" onclick="addScore('A',1)">
+                0
+
+            </div>
+
+            <button
+                class="secondary"
+                onclick="addScore('A',1)">
+
                 +1 Point
+
             </button>
 
-            <button class="secondary" onclick="addScore('A',-1)">
+            <button
+                class="secondary"
+                onclick="addScore('A',-1)">
+
                 −1
+
             </button>
 
         </div>
 
+
         <div class="panel">
 
-            <div class="team">🔴 TEAM B</div>
+            <div class="team">
+                🔴 TEAM B
+            </div>
 
-            <div class="score" id="scoreB">0</div>
+            <div
+                class="score"
+                id="scoreB">
 
-            <button class="secondary" onclick="addScore('B',1)">
+                0
+
+            </div>
+
+            <button
+                class="secondary"
+                onclick="addScore('B',1)">
+
                 +1 Point
+
             </button>
 
-            <button class="secondary" onclick="addScore('B',-1)">
+            <button
+                class="secondary"
+                onclick="addScore('B',-1)">
+
                 −1
+
             </button>
 
         </div>
 
     </div>
 
-    <div class="winner" id="winner">
-        <h2>🎉 GREAT JOB!</h2>
-        <div id="finalScore"></div>
+
+    <!-- FINISH -->
+
+    <div
+        class="winner"
+        id="winner">
+
+        <h2>
+            🎉 GREAT JOB!
+        </h2>
+
+        <div id="finalScore">
+        </div>
+
     </div>
+
 
     <div class="footer">
-        Maya's English Dice • Classroom Speaking Activity
+
+        Maya's English Dice
+        •
+        Classroom Speaking Activity
+
     </div>
 
 </div>
 
+
 <script>
 
+/* =========================================
+   SUBJECTS
+========================================= */
+
 const subjects = [
+
     "I",
     "You",
     "We",
     "They",
     "He",
     "She"
+
 ];
 
-/*
-Each activity is represented by a function.
-This allows possessive pronouns to automatically
-change according to the subject.
-*/
+
+/* =========================================
+   ACTION DATABASE
+
+   The activity automatically changes
+   possessive pronouns according to subject.
+========================================= */
 
 const actions = [
 
     {
         verb:"get up",
         past:"got up",
-        activity: s => "early in the morning"
+        activity:s=>"early in the morning"
     },
 
     {
         verb:"brush",
         past:"brushed",
-        activity: s => possessive(s) + " teeth"
+        activity:s=>possessive(s)+" teeth"
     },
 
     {
         verb:"take",
         past:"took",
-        activity: s => "a shower"
+        activity:s=>"a shower"
     },
 
     {
         verb:"have",
         past:"had",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "breakfast",
             "lunch",
             "dinner"
@@ -442,7 +1012,7 @@ const actions = [
     {
         verb:"eat",
         past:"ate",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "breakfast",
             "lunch",
             "dinner",
@@ -454,7 +1024,7 @@ const actions = [
     {
         verb:"drink",
         past:"drank",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "water",
             "milk",
             "juice",
@@ -465,7 +1035,7 @@ const actions = [
     {
         verb:"go to",
         past:"went to",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "school",
             "the library",
             "the market",
@@ -476,7 +1046,7 @@ const actions = [
     {
         verb:"study",
         past:"studied",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "English",
             "mathematics",
             "science",
@@ -488,7 +1058,7 @@ const actions = [
     {
         verb:"read",
         past:"read",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a book",
             "a novel",
             "a magazine",
@@ -499,7 +1069,7 @@ const actions = [
     {
         verb:"write",
         past:"wrote",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "an email",
             "a story",
             "a journal",
@@ -510,7 +1080,7 @@ const actions = [
     {
         verb:"do",
         past:"did",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "homework",
             "housework",
             "exercise"
@@ -520,7 +1090,7 @@ const actions = [
     {
         verb:"play",
         past:"played",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "football",
             "badminton",
             "basketball",
@@ -531,7 +1101,7 @@ const actions = [
     {
         verb:"watch",
         past:"watched",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "TV",
             "a movie",
             "a video",
@@ -542,7 +1112,7 @@ const actions = [
     {
         verb:"listen to",
         past:"listened to",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "music",
             "a podcast",
             "the radio"
@@ -552,15 +1122,15 @@ const actions = [
     {
         verb:"clean",
         past:"cleaned",
-        activity: s => possessive(s) + " bedroom"
+        activity:s=>possessive(s)+" bedroom"
     },
 
     {
         verb:"wash",
         past:"washed",
-        activity: s => randomFrom([
-            possessive(s) + " hands",
-            possessive(s) + " clothes",
+        activity:s=>randomFrom([
+            possessive(s)+" hands",
+            possessive(s)+" clothes",
             "the dishes",
             "the car"
         ])
@@ -569,9 +1139,9 @@ const actions = [
     {
         verb:"help",
         past:"helped",
-        activity: s => randomFrom([
-            possessive(s) + " parents",
-            possessive(s) + " friends",
+        activity:s=>randomFrom([
+            possessive(s)+" parents",
+            possessive(s)+" friends",
             "the teacher",
             "classmates"
         ])
@@ -580,7 +1150,7 @@ const actions = [
     {
         verb:"cook",
         past:"cooked",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "breakfast",
             "lunch",
             "dinner"
@@ -590,19 +1160,19 @@ const actions = [
     {
         verb:"wear",
         past:"wore",
-        activity: s => possessive(s) + " school uniform"
+        activity:s=>possessive(s)+" school uniform"
     },
 
     {
         verb:"carry",
         past:"carried",
-        activity: s => possessive(s) + " backpack"
+        activity:s=>possessive(s)+" backpack"
     },
 
     {
         verb:"bring",
         past:"brought",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a notebook",
             "a water bottle",
             "an umbrella"
@@ -612,13 +1182,13 @@ const actions = [
     {
         verb:"take",
         past:"took",
-        activity: s => "notes"
+        activity:s=>"notes"
     },
 
     {
         verb:"practice",
         past:"practiced",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "English speaking",
             "pronunciation",
             "a presentation",
@@ -629,7 +1199,7 @@ const actions = [
     {
         verb:"prepare",
         past:"prepared",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "breakfast",
             "lunch",
             "dinner",
@@ -640,9 +1210,9 @@ const actions = [
     {
         verb:"check",
         past:"checked",
-        activity: s => randomFrom([
-            possessive(s) + " messages",
-            possessive(s) + " homework",
+        activity:s=>randomFrom([
+            possessive(s)+" messages",
+            possessive(s)+" homework",
             "the schedule"
         ])
     },
@@ -650,7 +1220,7 @@ const actions = [
     {
         verb:"join",
         past:"joined",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a school activity",
             "a club",
             "a study group"
@@ -660,8 +1230,8 @@ const actions = [
     {
         verb:"visit",
         past:"visited",
-        activity: s => randomFrom([
-            possessive(s) + " grandparents",
+        activity:s=>randomFrom([
+            possessive(s)+" grandparents",
             "a friend",
             "a relative"
         ])
@@ -670,21 +1240,21 @@ const actions = [
     {
         verb:"feed",
         past:"fed",
-        activity: s => possessive(s) + " pet"
+        activity:s=>possessive(s)+" pet"
     },
 
     {
         verb:"water",
         past:"watered",
-        activity: s => "the plants"
+        activity:s=>"the plants"
     },
 
     {
         verb:"organize",
         past:"organized",
-        activity: s => randomFrom([
-            possessive(s) + " desk",
-            possessive(s) + " books",
+        activity:s=>randomFrom([
+            possessive(s)+" desk",
+            possessive(s)+" books",
             "the classroom"
         ])
     },
@@ -692,7 +1262,7 @@ const actions = [
     {
         verb:"draw",
         past:"drew",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a picture",
             "a poster",
             "a diagram"
@@ -702,7 +1272,7 @@ const actions = [
     {
         verb:"send",
         past:"sent",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "an email",
             "a message",
             "a file"
@@ -712,7 +1282,7 @@ const actions = [
     {
         verb:"borrow",
         past:"borrowed",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a book",
             "a pen",
             "a dictionary"
@@ -722,7 +1292,7 @@ const actions = [
     {
         verb:"return",
         past:"returned",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a book",
             "a dictionary",
             "a library book"
@@ -732,7 +1302,7 @@ const actions = [
     {
         verb:"answer",
         past:"answered",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a question",
             "the teacher's question",
             "a quiz"
@@ -742,7 +1312,7 @@ const actions = [
     {
         verb:"ask",
         past:"asked",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a question",
             "the teacher",
             "a friend"
@@ -752,7 +1322,7 @@ const actions = [
     {
         verb:"discuss",
         past:"discussed",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a lesson",
             "a problem",
             "a school project"
@@ -762,7 +1332,7 @@ const actions = [
     {
         verb:"share",
         past:"shared",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "an idea",
             "a story",
             "an opinion"
@@ -772,7 +1342,7 @@ const actions = [
     {
         verb:"use",
         past:"used",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a computer",
             "a dictionary",
             "the internet"
@@ -782,7 +1352,7 @@ const actions = [
     {
         verb:"make",
         past:"made",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a poster",
             "a presentation",
             "a plan",
@@ -791,20 +1361,9 @@ const actions = [
     },
 
     {
-        verb:"visit",
-        past:"visited",
-        activity: s => randomFrom([
-            "the library",
-            "a museum",
-            "a park",
-            "a relative"
-        ])
-    },
-
-    {
         verb:"exercise",
         past:"exercised",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "in the morning",
             "after school",
             "at the weekend"
@@ -814,7 +1373,7 @@ const actions = [
     {
         verb:"walk",
         past:"walked",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "to school",
             "in the park",
             "around the neighborhood"
@@ -824,7 +1383,7 @@ const actions = [
     {
         verb:"ride",
         past:"rode",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a bicycle",
             "a motorcycle",
             "a bus"
@@ -834,7 +1393,7 @@ const actions = [
     {
         verb:"meet",
         past:"met",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a friend",
             "classmates",
             "a teacher"
@@ -844,7 +1403,7 @@ const actions = [
     {
         verb:"talk to",
         past:"talked to",
-        activity: s => randomFrom([
+        activity:s=>randomFrom([
             "a friend",
             "classmates",
             "a teacher",
@@ -854,35 +1413,61 @@ const actions = [
 
 ];
 
+
+/* =========================================
+   HELPER FUNCTIONS
+========================================= */
+
 function randomIndex(length){
-    return Math.floor(Math.random() * length);
+
+    return Math.floor(
+        Math.random()*length
+    );
+
 }
 
 function randomFrom(array){
-    return array[randomIndex(array.length)];
+
+    return array[
+        randomIndex(array.length)
+    ];
+
 }
 
 function possessive(subject){
 
-    const map = {
+    const map={
+
         "I":"my",
         "You":"your",
         "We":"our",
         "They":"their",
         "He":"his",
         "She":"her"
+
     };
 
     return map[subject];
+
 }
+
+
+/* =========================================
+   PRESENT VERB
+========================================= */
 
 function getPresentVerb(subject,verb){
 
-    if(subject !== "He" && subject !== "She"){
+    if(
+        subject!=="He" &&
+        subject!=="She"
+    ){
+
         return verb;
+
     }
 
-    const forms = {
+    const forms={
 
         "get up":"gets up",
         "brush":"brushes",
@@ -928,454 +1513,774 @@ function getPresentVerb(subject,verb){
         "ride":"rides",
         "meet":"meets",
         "talk to":"talks to"
+
     };
 
-    return forms[verb] || verb + "s";
+    return forms[verb] || verb+"s";
+
 }
 
-let currentSubject = "";
-let currentAction = null;
-let currentActivity = "";
-let currentSentence = "";
-let currentQuestion = "";
-let currentNegative = "";
 
-let previousActionIndex = -1;
-let previousSubjectIndex = -1;
+/* =========================================
+   STATE
+========================================= */
 
-let scoreA = 0;
-let scoreB = 0;
+let currentSubject="";
+let currentAction=null;
+let currentActivity="";
 
-let time = 30;
-let timerInterval = null;
+let currentSentence="";
+let currentQuestion="";
+let currentNegative="";
 
-let challengeIndex = 0;
+let previousActionIndex=-1;
+let previousSubjectIndex=-1;
 
-const challenges = [
+let scoreA=0;
+let scoreB=0;
+
+let time=30;
+let timerInterval=null;
+
+let challengeIndex=0;
+
+
+/* =========================================
+   CHALLENGES
+========================================= */
+
+const challenges=[
+
     "① Make a complete sentence.",
+
     "② Change it into a question.",
+
     "③ Change it into a negative sentence.",
+
     "④ Speak about it for 30 seconds."
+
 ];
+
+
+/* =========================================
+   BUILD SENTENCE
+========================================= */
 
 function buildSentence(){
 
-    const tense =
+    const tense=
         document.getElementById("tense").value;
 
-    let verb;
+    let verb="";
 
-    if(tense === "present"){
+    if(tense==="present"){
 
-        verb = getPresentVerb(
+        verb=getPresentVerb(
             currentSubject,
             currentAction.verb
         );
+
     }
 
-    if(tense === "past"){
+    if(tense==="past"){
 
-        verb = currentAction.past;
+        verb=currentAction.past;
+
     }
 
-    if(tense === "future"){
+    if(tense==="future"){
 
-        verb = "will " + currentAction.verb;
+        verb="will "+
+            currentAction.verb;
+
     }
 
-    currentSentence =
-        currentSubject + " " +
-        verb + " " +
-        currentActivity + ".";
+    currentSentence=
+        currentSubject+
+        " "+
+        verb+
+        " "+
+        currentActivity+
+        ".";
 
-    document.getElementById("sentence").textContent =
+    document.getElementById("sentence")
+        .textContent=
         currentSentence;
 
     buildAnswers();
+
 }
+
+
+/* =========================================
+   QUESTIONS & NEGATIVES
+========================================= */
 
 function buildAnswers(){
 
-    const tense =
+    const tense=
         document.getElementById("tense").value;
 
-    const baseVerb =
+    const baseVerb=
         currentAction.verb;
 
-    if(tense === "present"){
+
+    if(tense==="present"){
 
         if(
-            currentSubject === "I" ||
-            currentSubject === "You" ||
-            currentSubject === "We" ||
-            currentSubject === "They"
+
+            currentSubject==="I" ||
+            currentSubject==="You" ||
+            currentSubject==="We" ||
+            currentSubject==="They"
+
         ){
 
-            currentQuestion =
-                "Do " +
-                currentSubject.toLowerCase() +
-                " " +
-                baseVerb +
-                " " +
-                currentActivity +
+            currentQuestion=
+                "Do "+
+                currentSubject.toLowerCase()+
+                " "+
+                baseVerb+
+                " "+
+                currentActivity+
                 "?";
 
-            currentNegative =
-                currentSubject +
-                " don't " +
-                baseVerb +
-                " " +
-                currentActivity +
+            currentNegative=
+                currentSubject+
+                " don't "+
+                baseVerb+
+                " "+
+                currentActivity+
                 ".";
 
-        }else{
-
-            currentQuestion =
-                "Does " +
-                currentSubject.toLowerCase() +
-                " " +
-                baseVerb +
-                " " +
-                currentActivity +
-                "?";
-
-            currentNegative =
-                currentSubject +
-                " doesn't " +
-                baseVerb +
-                " " +
-                currentActivity +
-                ".";
         }
+
+        else{
+
+            currentQuestion=
+                "Does "+
+                currentSubject.toLowerCase()+
+                " "+
+                baseVerb+
+                " "+
+                currentActivity+
+                "?";
+
+            currentNegative=
+                currentSubject+
+                " doesn't "+
+                baseVerb+
+                " "+
+                currentActivity+
+                ".";
+
+        }
+
     }
 
-    if(tense === "past"){
 
-        currentQuestion =
-            "Did " +
-            currentSubject.toLowerCase() +
-            " " +
-            baseVerb +
-            " " +
-            currentActivity +
+    if(tense==="past"){
+
+        currentQuestion=
+            "Did "+
+            currentSubject.toLowerCase()+
+            " "+
+            baseVerb+
+            " "+
+            currentActivity+
             "?";
 
-        currentNegative =
-            currentSubject +
-            " didn't " +
-            baseVerb +
-            " " +
-            currentActivity +
+        currentNegative=
+            currentSubject+
+            " didn't "+
+            baseVerb+
+            " "+
+            currentActivity+
             ".";
+
     }
 
-    if(tense === "future"){
 
-        currentQuestion =
-            "Will " +
-            currentSubject.toLowerCase() +
-            " " +
-            baseVerb +
-            " " +
-            currentActivity +
+    if(tense==="future"){
+
+        currentQuestion=
+            "Will "+
+            currentSubject.toLowerCase()+
+            " "+
+            baseVerb+
+            " "+
+            currentActivity+
             "?";
 
-        currentNegative =
-            currentSubject +
-            " won't " +
-            baseVerb +
-            " " +
-            currentActivity +
+        currentNegative=
+            currentSubject+
+            " won't "+
+            baseVerb+
+            " "+
+            currentActivity+
             ".";
+
     }
+
 }
+
+
+/* =========================================
+   ROLL
+========================================= */
 
 function rollDice(){
 
-    document.getElementById("rollButton").disabled = true;
+    document.getElementById(
+        "rollButton"
+    ).disabled=true;
 
-    document.querySelectorAll(".dice").forEach(
-        dice => dice.classList.add("rolling")
+
+    document.querySelectorAll(
+        ".dice"
+    ).forEach(
+        dice=>dice.classList.add("rolling")
     );
 
-    let count = 0;
 
-    const animation = setInterval(function(){
+    let count=0;
 
-        let subjectIndex =
-            randomIndex(subjects.length);
 
-        let actionIndex =
-            randomIndex(actions.length);
+    const animation=setInterval(
 
-        if(subjects.length > 1){
+        function(){
 
-            while(subjectIndex === previousSubjectIndex){
-                subjectIndex =
-                    randomIndex(subjects.length);
+            let subjectIndex=
+                randomIndex(
+                    subjects.length
+                );
+
+            let actionIndex=
+                randomIndex(
+                    actions.length
+                );
+
+
+            if(subjects.length>1){
+
+                while(
+                    subjectIndex===
+                    previousSubjectIndex
+                ){
+
+                    subjectIndex=
+                        randomIndex(
+                            subjects.length
+                        );
+
+                }
+
             }
-        }
 
-        if(actions.length > 1){
 
-            while(actionIndex === previousActionIndex){
-                actionIndex =
-                    randomIndex(actions.length);
+            if(actions.length>1){
+
+                while(
+                    actionIndex===
+                    previousActionIndex
+                ){
+
+                    actionIndex=
+                        randomIndex(
+                            actions.length
+                        );
+
+                }
+
             }
-        }
 
-        const subject =
-            subjects[subjectIndex];
 
-        const action =
-            actions[actionIndex];
+            const subject=
+                subjects[
+                    subjectIndex
+                ];
 
-        const activity =
-            action.activity(subject);
+            const action=
+                actions[
+                    actionIndex
+                ];
 
-        document.getElementById("subject").textContent =
-            subject;
+            const activity=
+                action.activity(
+                    subject
+                );
 
-        document.getElementById("verb").textContent =
-            action.verb;
 
-        document.getElementById("activity").textContent =
-            activity;
+            document.getElementById(
+                "subject"
+            ).textContent=
+                subject;
 
-        count++;
+            document.getElementById(
+                "verb"
+            ).textContent=
+                action.verb;
 
-        if(count >= 12){
+            document.getElementById(
+                "activity"
+            ).textContent=
+                activity;
 
-            clearInterval(animation);
 
-            document.querySelectorAll(".dice").forEach(
-                dice => dice.classList.remove("rolling")
-            );
+            count++;
 
-            previousSubjectIndex = subjectIndex;
-            previousActionIndex = actionIndex;
 
-            currentSubject = subject;
-            currentAction = action;
-            currentActivity = activity;
+            if(count>=12){
+
+                clearInterval(
+                    animation
+                );
+
+
+                document.querySelectorAll(
+                    ".dice"
+                ).forEach(
+                    dice=>
+                        dice.classList.remove(
+                            "rolling"
+                        )
+                );
+
+
+                previousSubjectIndex=
+                    subjectIndex;
+
+                previousActionIndex=
+                    actionIndex;
+
+
+                currentSubject=
+                    subject;
+
+                currentAction=
+                    action;
+
+                currentActivity=
+                    activity;
+
+
+                buildSentence();
+
+
+                challengeIndex=
+                    randomIndex(
+                        challenges.length
+                    );
+
+
+                document.getElementById(
+                    "challenge"
+                ).textContent=
+                    challenges[
+                        challengeIndex
+                    ];
+
+
+                document.getElementById(
+                    "answer"
+                ).style.display=
+                    "none";
+
+                document.getElementById(
+                    "answer"
+                ).textContent="";
+
+
+                document.getElementById(
+                    "rollButton"
+                ).disabled=false;
+
+            }
+
+        },
+
+        90
+
+    );
+
+}
+
+
+/* =========================================
+   EVENTS
+========================================= */
+
+document.getElementById(
+    "rollButton"
+).addEventListener(
+    "click",
+    rollDice
+);
+
+
+document.getElementById(
+    "tense"
+).addEventListener(
+    "change",
+    function(){
+
+        if(currentAction){
 
             buildSentence();
 
-            challengeIndex =
-                randomIndex(challenges.length);
-
-            document.getElementById("challenge").textContent =
-                challenges[challengeIndex];
-
-            document.getElementById("answer").style.display =
-                "none";
-
-            document.getElementById("answer").textContent = "";
-
-            document.getElementById("rollButton").disabled = false;
         }
 
-    },90);
-}
-
-document.getElementById("rollButton")
-.addEventListener("click",rollDice);
-
-document.getElementById("tense")
-.addEventListener("change",function(){
-
-    if(currentAction){
-        buildSentence();
     }
+);
 
-});
 
-document.getElementById("nextChallengeButton")
-.addEventListener("click",function(){
+document.getElementById(
+    "nextChallengeButton"
+).addEventListener(
+    "click",
+    function(){
 
-    if(!currentAction){
+        if(!currentAction){
 
-        document.getElementById("challenge").textContent =
-            "Roll the dice first!";
+            document.getElementById(
+                "challenge"
+            ).textContent=
+                "Roll the dice first!";
 
-        return;
+            return;
+
+        }
+
+
+        challengeIndex=
+            (challengeIndex+1)
+            %
+            challenges.length;
+
+
+        document.getElementById(
+            "challenge"
+        ).textContent=
+            challenges[
+                challengeIndex
+            ];
+
+
+        document.getElementById(
+            "answer"
+        ).style.display=
+            "none";
+
     }
+);
 
-    challengeIndex =
-        (challengeIndex + 1) % challenges.length;
 
-    document.getElementById("challenge").textContent =
-        challenges[challengeIndex];
+/* =========================================
+   MODEL ANSWER
+========================================= */
 
-    document.getElementById("answer").style.display =
-        "none";
-});
+document.getElementById(
+    "showAnswerButton"
+).addEventListener(
+    "click",
+    function(){
 
-document.getElementById("showAnswerButton")
-.addEventListener("click",function(){
+        if(!currentAction)
+            return;
 
-    if(!currentAction){
-        return;
+
+        let answer="";
+
+
+        if(challengeIndex===0){
+
+            answer=currentSentence;
+
+        }
+
+
+        if(challengeIndex===1){
+
+            answer=currentQuestion;
+
+        }
+
+
+        if(challengeIndex===2){
+
+            answer=currentNegative;
+
+        }
+
+
+        if(challengeIndex===3){
+
+            answer=
+                "Talk about: "+
+                currentSentence+
+                " — Add more details!";
+
+        }
+
+
+        const answerElement=
+            document.getElementById(
+                "answer"
+            );
+
+
+        answerElement.textContent=
+            answer;
+
+        answerElement.style.display=
+            "block";
+
     }
+);
 
-    let answer = "";
 
-    if(challengeIndex === 0){
-        answer = currentSentence;
+/* =========================================
+   TIMER
+========================================= */
+
+document.getElementById(
+    "timerButton"
+).addEventListener(
+    "click",
+    function(){
+
+        clearInterval(
+            timerInterval
+        );
+
+
+        time=30;
+
+
+        document.getElementById(
+            "timer"
+        ).textContent=
+            time;
+
+
+        this.textContent=
+            "⏱️ RUNNING...";
+
+
+        timerInterval=
+            setInterval(
+                function(){
+
+                    time--;
+
+
+                    document.getElementById(
+                        "timer"
+                    ).textContent=
+                        time;
+
+
+                    if(time<=0){
+
+                        clearInterval(
+                            timerInterval
+                        );
+
+
+                        document.getElementById(
+                            "timerButton"
+                        ).textContent=
+                            "⏱️ START 30s";
+
+
+                        document.getElementById(
+                            "challenge"
+                        ).textContent=
+                            "⏰ TIME'S UP!";
+
+                    }
+
+                },
+
+                1000
+
+            );
+
     }
+);
 
-    if(challengeIndex === 1){
-        answer = currentQuestion;
-    }
 
-    if(challengeIndex === 2){
-        answer = currentNegative;
-    }
-
-    if(challengeIndex === 3){
-
-        answer =
-            "Talk about: " +
-            currentSentence +
-            " — Add more details!";
-    }
-
-    const answerElement =
-        document.getElementById("answer");
-
-    answerElement.textContent = answer;
-    answerElement.style.display = "block";
-});
-
-document.getElementById("timerButton")
-.addEventListener("click",function(){
-
-    clearInterval(timerInterval);
-
-    time = 30;
-
-    document.getElementById("timer").textContent =
-        time;
-
-    this.textContent =
-        "⏱️ RUNNING...";
-
-    timerInterval =
-        setInterval(function(){
-
-            time--;
-
-            document.getElementById("timer").textContent =
-                time;
-
-            if(time <= 0){
-
-                clearInterval(timerInterval);
-
-                document.getElementById("timerButton").textContent =
-                    "⏱️ START 30s";
-
-                document.getElementById("challenge").textContent =
-                    "⏰ TIME'S UP!";
-            }
-
-        },1000);
-});
+/* =========================================
+   SCORE
+========================================= */
 
 function addScore(team,amount){
 
-    if(team === "A"){
+    if(team==="A"){
 
-        scoreA += amount;
+        scoreA+=amount;
 
-        if(scoreA < 0)
-            scoreA = 0;
+        if(scoreA<0)
+            scoreA=0;
 
-        document.getElementById("scoreA").textContent =
+        document.getElementById(
+            "scoreA"
+        ).textContent=
             scoreA;
+
     }
 
-    if(team === "B"){
 
-        scoreB += amount;
+    if(team==="B"){
 
-        if(scoreB < 0)
-            scoreB = 0;
+        scoreB+=amount;
 
-        document.getElementById("scoreB").textContent =
+        if(scoreB<0)
+            scoreB=0;
+
+        document.getElementById(
+            "scoreB"
+        ).textContent=
             scoreB;
+
     }
+
 }
 
-document.getElementById("finishButton")
-.addEventListener("click",function(){
 
-    const winner =
-        document.getElementById("winner");
+/* =========================================
+   FINISH
+========================================= */
 
-    document.getElementById("finalScore").innerHTML =
-        "<strong>TEAM A:</strong> " +
-        scoreA +
-        " &nbsp;&nbsp; | &nbsp;&nbsp; " +
-        "<strong>TEAM B:</strong> " +
-        scoreB;
+document.getElementById(
+    "finishButton"
+).addEventListener(
+    "click",
+    function(){
 
-    winner.style.display =
-        "block";
+        const winner=
+            document.getElementById(
+                "winner"
+            );
 
-    winner.scrollIntoView({
-        behavior:"smooth"
-    });
-});
 
-document.getElementById("resetButton")
-.addEventListener("click",function(){
+        document.getElementById(
+            "finalScore"
+        ).innerHTML=
 
-    clearInterval(timerInterval);
+            "<strong>TEAM A:</strong> "+
+            scoreA+
+            " &nbsp;&nbsp; | &nbsp;&nbsp; "+
+            "<strong>TEAM B:</strong> "+
+            scoreB;
 
-    currentSubject = "";
-    currentAction = null;
-    currentActivity = "";
 
-    previousActionIndex = -1;
-    previousSubjectIndex = -1;
+        winner.style.display=
+            "block";
 
-    scoreA = 0;
-    scoreB = 0;
 
-    time = 30;
+        winner.scrollIntoView({
+            behavior:"smooth"
+        });
 
-    document.getElementById("subject").textContent = "?";
-    document.getElementById("verb").textContent = "?";
-    document.getElementById("activity").textContent = "?";
+    }
+);
 
-    document.getElementById("sentence").textContent =
-        "Roll the dice and make a complete sentence!";
 
-    document.getElementById("challenge").textContent =
-        "Roll the dice to start!";
+/* =========================================
+   RESET
+========================================= */
 
-    document.getElementById("answer").style.display =
-        "none";
+document.getElementById(
+    "resetButton"
+).addEventListener(
+    "click",
+    function(){
 
-    document.getElementById("answer").textContent =
-        "";
+        clearInterval(
+            timerInterval
+        );
 
-    document.getElementById("timer").textContent =
-        "30";
 
-    document.getElementById("scoreA").textContent =
-        "0";
+        currentSubject="";
+        currentAction=null;
+        currentActivity="";
 
-    document.getElementById("scoreB").textContent =
-        "0";
+        previousActionIndex=-1;
+        previousSubjectIndex=-1;
 
-    document.getElementById("timerButton").textContent =
-        "⏱️ START 30s";
+        scoreA=0;
+        scoreB=0;
 
-    document.getElementById("winner").style.display =
-        "none";
-});
+        time=30;
+
+
+        document.getElementById(
+            "subject"
+        ).textContent="?";
+
+
+        document.getElementById(
+            "verb"
+        ).textContent="?";
+
+
+        document.getElementById(
+            "activity"
+        ).textContent="?";
+
+
+        document.getElementById(
+            "sentence"
+        ).textContent=
+            "Roll the dice and make a complete sentence!";
+
+
+        document.getElementById(
+            "challenge"
+        ).textContent=
+            "Roll the dice to start!";
+
+
+        document.getElementById(
+            "answer"
+        ).style.display=
+            "none";
+
+
+        document.getElementById(
+            "answer"
+        ).textContent="";
+
+
+        document.getElementById(
+            "timer"
+        ).textContent="30";
+
+
+        document.getElementById(
+            "scoreA"
+        ).textContent="0";
+
+
+        document.getElementById(
+            "scoreB"
+        ).textContent="0";
+
+
+        document.getElementById(
+            "timerButton"
+        ).textContent=
+            "⏱️ START 30s";
+
+
+        document.getElementById(
+            "winner"
+        ).style.display=
+            "none";
+
+    }
+);
 
 </script>
 
