@@ -3,13 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Maya's English Dice</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
     margin:0;
@@ -20,39 +17,39 @@ body{
 }
 
 .container{
-    max-width:1200px;
+    max-width:1250px;
     margin:auto;
-    padding:30px 20px;
+    padding:28px 20px 40px;
     text-align:center;
 }
 
 .title{
     font-size:clamp(32px,5vw,60px);
     font-weight:900;
-    margin-bottom:5px;
+    margin-bottom:4px;
 }
 
 .subtitle{
-    font-size:20px;
+    font-size:clamp(16px,2vw,21px);
     color:#64748b;
-    margin-bottom:25px;
+    margin-bottom:22px;
 }
 
-.controls{
+.topbar{
     background:white;
-    padding:18px;
+    padding:16px;
     border-radius:20px;
+    box-shadow:0 8px 22px rgba(0,0,0,.07);
     margin-bottom:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
 select{
-    padding:12px 18px;
-    border-radius:12px;
+    padding:11px 18px;
     border:2px solid #dbe3ee;
+    border-radius:12px;
     font-size:17px;
     font-weight:700;
-    margin:5px;
+    margin-left:8px;
 }
 
 .dice-container{
@@ -76,15 +73,15 @@ select{
 
 .label{
     font-size:14px;
-    font-weight:800;
+    font-weight:900;
     letter-spacing:2px;
     color:#64748b;
     text-transform:uppercase;
-    margin-bottom:15px;
+    margin-bottom:14px;
 }
 
 .word{
-    font-size:clamp(25px,4vw,45px);
+    font-size:clamp(25px,4vw,46px);
     font-weight:900;
     line-height:1.15;
 }
@@ -94,100 +91,146 @@ select{
 }
 
 @keyframes shake{
-    from{transform:rotate(-4deg) scale(.98);}
-    to{transform:rotate(4deg) scale(1.03);}
+    from{transform:rotate(-4deg) scale(.98)}
+    to{transform:rotate(4deg) scale(1.03)}
+}
+
+.buttons{
+    margin:22px 0;
 }
 
 button{
     border:none;
     border-radius:15px;
-    padding:14px 22px;
-    margin:6px;
-    font-size:17px;
+    padding:13px 20px;
+    margin:5px;
+    font-size:16px;
     font-weight:800;
     cursor:pointer;
 }
 
 button:disabled{
-    opacity:.6;
+    opacity:.55;
     cursor:not-allowed;
 }
 
-.roll-button{
+.roll{
     background:#4f46e5;
     color:white;
-    font-size:21px;
-    box-shadow:0 8px 20px rgba(79,70,229,.3);
+    font-size:20px;
+    padding:16px 27px;
 }
 
 .secondary{
     background:white;
-    color:#172033;
     border:2px solid #dbe3ee;
+    color:#172033;
 }
 
-.challenge{
-    background:white;
-    border-radius:22px;
-    padding:22px;
-    margin:22px 0;
-    box-shadow:0 8px 20px rgba(0,0,0,.07);
+.answer-buttons{
+    margin-top:10px;
 }
 
-.challenge-title{
-    font-size:18px;
-    font-weight:900;
-    color:#64748b;
-    margin-bottom:10px;
-}
-
-.challenge-text{
-    font-size:clamp(20px,3vw,30px);
-    font-weight:900;
+.answer-buttons button{
+    min-width:190px;
 }
 
 .sentence{
     background:white;
     border:3px solid #dbe3ee;
     border-radius:22px;
-    padding:22px;
-    margin:20px 0;
-    font-size:clamp(20px,3vw,32px);
-    font-weight:800;
-    min-height:85px;
+    padding:23px;
+    min-height:90px;
     display:flex;
     align-items:center;
     justify-content:center;
+    font-size:clamp(21px,3vw,34px);
+    font-weight:900;
+    margin:20px 0;
+}
+
+.challenge{
+    background:white;
+    border-radius:22px;
+    padding:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.07);
+    margin-bottom:20px;
+}
+
+.challenge-title{
+    color:#64748b;
+    font-weight:900;
+    font-size:15px;
+    letter-spacing:1px;
+}
+
+.challenge-text{
+    font-size:clamp(21px,3vw,30px);
+    font-weight:900;
+    margin-top:8px;
+}
+
+.answer{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    border-radius:15px;
+    background:#f1f5f9;
+    font-size:clamp(18px,2.5vw,27px);
+    font-weight:800;
 }
 
 .bottom{
     display:grid;
     grid-template-columns:1fr 1fr 1fr;
-    gap:20px;
-    margin-top:20px;
+    gap:18px;
 }
 
 .panel{
     background:white;
     border:2px solid #dbe3ee;
     border-radius:20px;
-    padding:20px;
+    padding:18px;
 }
 
-.timer,
-.score{
-    font-size:42px;
+.timer{
+    font-size:45px;
     font-weight:900;
-    margin:10px;
+    margin:8px;
 }
 
 .team{
-    font-size:20px;
+    font-size:19px;
     font-weight:900;
 }
 
+.score{
+    font-size:42px;
+    font-weight:900;
+    margin:5px;
+}
+
+.finish{
+    background:#172033;
+    color:white;
+}
+
+.winner{
+    display:none;
+    background:white;
+    border-radius:25px;
+    padding:30px;
+    margin-top:22px;
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+.winner h2{
+    font-size:32px;
+    margin:5px;
+}
+
 .footer{
-    margin-top:30px;
+    margin-top:25px;
     color:#94a3b8;
     font-size:14px;
 }
@@ -209,16 +252,13 @@ button:disabled{
 
 <div class="container">
 
-    <div class="title">
-        🎲 MAYA'S ENGLISH DICE
-    </div>
+    <div class="title">🎲 MAYA'S ENGLISH DICE</div>
 
     <div class="subtitle">
         Daily Speaking Challenge
     </div>
 
-    <div class="controls">
-
+    <div class="topbar">
         <strong>TENSE:</strong>
 
         <select id="tense">
@@ -226,31 +266,30 @@ button:disabled{
             <option value="past">Simple Past</option>
             <option value="future">Simple Future</option>
         </select>
-
     </div>
 
     <div class="dice-container">
 
-        <div class="dice" id="dice1">
+        <div class="dice" id="diceSubject">
             <div class="label">Subject</div>
             <div class="word" id="subject">?</div>
         </div>
 
-        <div class="dice" id="dice2">
+        <div class="dice" id="diceVerb">
             <div class="label">Verb</div>
             <div class="word" id="verb">?</div>
         </div>
 
-        <div class="dice" id="dice3">
+        <div class="dice" id="diceActivity">
             <div class="label">Daily Activity</div>
             <div class="word" id="activity">?</div>
         </div>
 
     </div>
 
-    <div>
+    <div class="buttons">
 
-        <button class="roll-button" id="rollButton">
+        <button class="roll" id="rollButton">
             🎲 ROLL THE DICE
         </button>
 
@@ -260,6 +299,10 @@ button:disabled{
 
         <button class="secondary" id="resetButton">
             🔄 RESET
+        </button>
+
+        <button class="finish" id="finishButton">
+            🏁 FINISH GAME
         </button>
 
     </div>
@@ -278,54 +321,69 @@ button:disabled{
             Roll the dice to start!
         </div>
 
+        <div class="answer" id="answer"></div>
+
+        <div class="answer-buttons">
+
+            <button class="secondary" id="showAnswerButton">
+                👀 SHOW MODEL ANSWER
+            </button>
+
+            <button class="secondary" id="nextChallengeButton">
+                🎯 NEXT CHALLENGE
+            </button>
+
+        </div>
+
     </div>
 
     <div class="bottom">
 
         <div class="panel">
 
-            <div class="label">
-                Speaking Timer
-            </div>
+            <div class="label">Speaking Timer</div>
 
-            <div class="timer" id="timer">
-                30
-            </div>
+            <div class="timer" id="timer">30</div>
 
         </div>
 
         <div class="panel">
 
-            <div class="team">
-                🔵 TEAM A
-            </div>
+            <div class="team">🔵 TEAM A</div>
 
-            <div class="score" id="scoreA">
-                0
-            </div>
+            <div class="score" id="scoreA">0</div>
 
-            <button class="secondary" onclick="addScore('A')">
+            <button class="secondary" onclick="addScore('A',1)">
                 +1 Point
+            </button>
+
+            <button class="secondary" onclick="addScore('A',-1)">
+                −1
             </button>
 
         </div>
 
         <div class="panel">
 
-            <div class="team">
-                🔴 TEAM B
-            </div>
+            <div class="team">🔴 TEAM B</div>
 
-            <div class="score" id="scoreB">
-                0
-            </div>
+            <div class="score" id="scoreB">0</div>
 
-            <button class="secondary" onclick="addScore('B')">
+            <button class="secondary" onclick="addScore('B',1)">
                 +1 Point
+            </button>
+
+            <button class="secondary" onclick="addScore('B',-1)">
+                −1
             </button>
 
         </div>
 
+    </div>
+
+    <div class="winner" id="winner">
+        <h2>🎉 GREAT JOB!</h2>
+        <div id="finalScore"></div>
     </div>
 
     <div class="footer">
@@ -345,142 +403,395 @@ const subjects = [
     "She"
 ];
 
-const verbs = [
-    "get up",
-    "eat",
-    "drink",
-    "go to",
-    "study",
-    "read",
-    "clean",
-    "play",
-    "watch",
-    "do",
-    "have",
-    "wash"
+/*
+   Each verb is permanently paired with natural activities.
+   This prevents impossible combinations such as:
+   "study breakfast" or "wash football".
+*/
+const actions = [
+    {
+        verb:"get up",
+        present:"get up",
+        past:"got up",
+        activities:[
+            "early in the morning"
+        ]
+    },
+    {
+        verb:"brush",
+        present:"brush",
+        past:"brushed",
+        activities:[
+            "my teeth"
+        ]
+    },
+    {
+        verb:"take",
+        present:"take",
+        past:"took",
+        activities:[
+            "a shower"
+        ]
+    },
+    {
+        verb:"have",
+        present:"have",
+        past:"had",
+        activities:[
+            "breakfast",
+            "lunch",
+            "dinner"
+        ]
+    },
+    {
+        verb:"eat",
+        present:"eat",
+        past:"ate",
+        activities:[
+            "breakfast",
+            "lunch",
+            "dinner",
+            "fruit"
+        ]
+    },
+    {
+        verb:"drink",
+        present:"drink",
+        past:"drank",
+        activities:[
+            "water",
+            "milk",
+            "juice"
+        ]
+    },
+    {
+        verb:"go to",
+        present:"go to",
+        past:"went to",
+        activities:[
+            "school",
+            "the library",
+            "the market",
+            "the park"
+        ]
+    },
+    {
+        verb:"study",
+        present:"study",
+        past:"studied",
+        activities:[
+            "English",
+            "mathematics",
+            "science",
+            "history"
+        ]
+    },
+    {
+        verb:"read",
+        present:"read",
+        past:"read",
+        activities:[
+            "a book",
+            "a novel",
+            "a magazine"
+        ]
+    },
+    {
+        verb:"write",
+        present:"write",
+        past:"wrote",
+        activities:[
+            "an email",
+            "a story",
+            "a journal"
+        ]
+    },
+    {
+        verb:"do",
+        present:"do",
+        past:"did",
+        activities:[
+            "homework",
+            "housework",
+            "exercise"
+        ]
+    },
+    {
+        verb:"play",
+        present:"play",
+        past:"played",
+        activities:[
+            "football",
+            "badminton",
+            "basketball",
+            "volleyball"
+        ]
+    },
+    {
+        verb:"watch",
+        present:"watch",
+        past:"watched",
+        activities:[
+            "TV",
+            "a movie",
+            "a video"
+        ]
+    },
+    {
+        verb:"listen to",
+        present:"listen to",
+        past:"listened to",
+        activities:[
+            "music",
+            "a podcast",
+            "the radio"
+        ]
+    },
+    {
+        verb:"clean",
+        present:"clean",
+        past:"cleaned",
+        activities:[
+            "my bedroom",
+            "the house",
+            "the classroom"
+        ]
+    },
+    {
+        verb:"wash",
+        present:"wash",
+        past:"washed",
+        activities:[
+            "the dishes",
+            "my clothes",
+            "the car"
+        ]
+    },
+    {
+        verb:"help",
+        present:"help",
+        past:"helped",
+        activities:[
+            "my parents",
+            "my friends",
+            "my teacher"
+        ]
+    },
+    {
+        verb:"cook",
+        present:"cook",
+        past:"cooked",
+        activities:[
+            "dinner",
+            "breakfast",
+            "lunch"
+        ]
+    }
 ];
 
-const activities = [
-    "early in the morning",
-    "breakfast",
-    "water",
-    "school",
-    "English",
-    "a book",
-    "the bedroom",
-    "football",
-    "TV",
-    "homework",
-    "dinner",
-    "the dishes"
+let currentSubject = "";
+let currentAction = null;
+let currentActivity = "";
+let currentSentence = "";
+let currentQuestion = "";
+let currentNegative = "";
+
+let previousActionIndex = -1;
+let previousSubjectIndex = -1;
+
+let scoreA = 0;
+let scoreB = 0;
+
+let time = 30;
+let timerInterval = null;
+
+let challengeIndex = 0;
+
+const challenges = [
+    "① Make a complete sentence.",
+    "② Change it into a question.",
+    "③ Change it into a negative sentence.",
+    "④ Speak about it for 30 seconds."
 ];
 
-const pastForms = {
-    "get up":"got up",
-    "eat":"ate",
-    "drink":"drank",
-    "go to":"went to",
-    "study":"studied",
-    "read":"read",
-    "clean":"cleaned",
-    "play":"played",
-    "watch":"watched",
-    "do":"did",
-    "have":"had",
-    "wash":"washed"
-};
-
-function randomItem(array){
-    return array[Math.floor(Math.random() * array.length)];
+function randomIndex(length){
+    return Math.floor(Math.random() * length);
 }
 
-function presentVerb(subject,verb){
+function chooseDifferentIndex(length,previous){
+    if(length <= 1) return 0;
+
+    let index;
+
+    do{
+        index = randomIndex(length);
+    }while(index === previous);
+
+    return index;
+}
+
+function getPresentVerb(subject,verb){
 
     if(subject !== "He" && subject !== "She"){
         return verb;
     }
 
-    const specialForms = {
+    const forms = {
+        "get up":"gets up",
+        "brush":"brushes",
+        "take":"takes",
         "have":"has",
-        "do":"does",
-        "go to":"goes to",
-        "wash":"washes",
-        "watch":"watches",
-        "study":"studies",
-        "play":"plays",
-        "read":"reads",
-        "clean":"cleans",
         "eat":"eats",
         "drink":"drinks",
-        "get up":"gets up"
+        "go to":"goes to",
+        "study":"studies",
+        "read":"reads",
+        "write":"writes",
+        "do":"does",
+        "play":"plays",
+        "watch":"watches",
+        "listen to":"listens to",
+        "clean":"cleans",
+        "wash":"washes",
+        "help":"helps",
+        "cook":"cooks"
     };
 
-    return specialForms[verb] || verb + "s";
+    return forms[verb] || verb + "s";
 }
 
-function createSentence(){
-
-    const subject =
-        document.getElementById("subject").textContent;
-
-    const verb =
-        document.getElementById("verb").textContent;
-
-    const activity =
-        document.getElementById("activity").textContent;
+function buildSentence(){
 
     const tense =
         document.getElementById("tense").value;
 
-    let correctVerb;
+    let verb;
 
     if(tense === "present"){
-        correctVerb = presentVerb(subject,verb);
+        verb = getPresentVerb(
+            currentSubject,
+            currentAction.present
+        );
     }
 
     if(tense === "past"){
-        correctVerb = pastForms[verb];
+        verb = currentAction.past;
     }
 
     if(tense === "future"){
-        correctVerb = "will " + verb;
+        verb = "will " + currentAction.present;
     }
 
+    currentSentence =
+        currentSubject + " " +
+        verb + " " +
+        currentActivity + ".";
+
     document.getElementById("sentence").textContent =
-        subject + " " + correctVerb + " " + activity + ".";
+        currentSentence;
 
-    createChallenge();
+    buildAnswers();
 }
 
-function createChallenge(){
+function buildAnswers(){
 
-    const challenges = [
-        "① Make a complete sentence.",
-        "② Change it into a question.",
-        "③ Change it into a negative sentence.",
-        "④ Speak for 30 seconds."
-    ];
+    const tense =
+        document.getElementById("tense").value;
 
-    document.getElementById("challenge").textContent =
-        challenges[Math.floor(Math.random() * challenges.length)];
+    const baseVerb =
+        currentAction.present;
+
+    if(tense === "present"){
+
+        if(currentSubject === "I" ||
+           currentSubject === "You" ||
+           currentSubject === "We" ||
+           currentSubject === "They"){
+
+            currentQuestion =
+                "Do " +
+                currentSubject.toLowerCase() +
+                " " +
+                baseVerb +
+                " " +
+                currentActivity +
+                "?";
+
+            currentNegative =
+                currentSubject +
+                " don't " +
+                baseVerb +
+                " " +
+                currentActivity +
+                ".";
+
+        }else{
+
+            currentQuestion =
+                "Does " +
+                currentSubject.toLowerCase() +
+                " " +
+                baseVerb +
+                " " +
+                currentActivity +
+                "?";
+
+            currentNegative =
+                currentSubject +
+                " doesn't " +
+                baseVerb +
+                " " +
+                currentActivity +
+                ".";
+        }
+    }
+
+    if(tense === "past"){
+
+        currentQuestion =
+            "Did " +
+            currentSubject.toLowerCase() +
+            " " +
+            baseVerb +
+            " " +
+            currentActivity +
+            "?";
+
+        currentNegative =
+            currentSubject +
+            " didn't " +
+            baseVerb +
+            " " +
+            currentActivity +
+            ".";
+    }
+
+    if(tense === "future"){
+
+        currentQuestion =
+            "Will " +
+            currentSubject.toLowerCase() +
+            " " +
+            baseVerb +
+            " " +
+            currentActivity +
+            "?";
+
+        currentNegative =
+            currentSubject +
+            " won't " +
+            baseVerb +
+            " " +
+            currentActivity +
+            ".";
+    }
 }
-
-const rollButton =
-    document.getElementById("rollButton");
-
-const diceElements = [
-    document.getElementById("dice1"),
-    document.getElementById("dice2"),
-    document.getElementById("dice3")
-];
-
-rollButton.addEventListener("click",rollDice);
 
 function rollDice(){
 
-    rollButton.disabled = true;
+    document.getElementById("rollButton").disabled = true;
 
-    diceElements.forEach(
+    document.querySelectorAll(".dice").forEach(
         dice => dice.classList.add("rolling")
     );
 
@@ -488,14 +799,26 @@ function rollDice(){
 
     const animation = setInterval(function(){
 
+        const subjectIndex =
+            randomIndex(subjects.length);
+
+        const actionIndex =
+            randomIndex(actions.length);
+
+        const action =
+            actions[actionIndex];
+
+        const activityIndex =
+            randomIndex(action.activities.length);
+
         document.getElementById("subject").textContent =
-            randomItem(subjects);
+            subjects[subjectIndex];
 
         document.getElementById("verb").textContent =
-            randomItem(verbs);
+            action.present;
 
         document.getElementById("activity").textContent =
-            randomItem(activities);
+            action.activities[activityIndex];
 
         count++;
 
@@ -503,20 +826,101 @@ function rollDice(){
 
             clearInterval(animation);
 
-            diceElements.forEach(
+            document.querySelectorAll(".dice").forEach(
                 dice => dice.classList.remove("rolling")
             );
 
-            rollButton.disabled = false;
+            previousSubjectIndex = subjectIndex;
+            previousActionIndex = actionIndex;
 
-            createSentence();
+            currentSubject = subjects[subjectIndex];
+            currentAction = action;
+            currentActivity = action.activities[activityIndex];
+
+            buildSentence();
+
+            challengeIndex =
+                randomIndex(challenges.length);
+
+            document.getElementById("challenge").textContent =
+                challenges[challengeIndex];
+
+            document.getElementById("answer").style.display =
+                "none";
+
+            document.getElementById("answer").textContent = "";
+
+            document.getElementById("rollButton").disabled = false;
         }
 
-    },100);
+    },90);
 }
 
-let time = 30;
-let timerInterval = null;
+document.getElementById("rollButton")
+.addEventListener("click",rollDice);
+
+document.getElementById("tense")
+.addEventListener("change",function(){
+
+    if(currentAction){
+        buildSentence();
+    }
+
+});
+
+document.getElementById("nextChallengeButton")
+.addEventListener("click",function(){
+
+    if(!currentAction){
+        document.getElementById("challenge").textContent =
+            "Roll the dice first!";
+        return;
+    }
+
+    challengeIndex =
+        (challengeIndex + 1) % challenges.length;
+
+    document.getElementById("challenge").textContent =
+        challenges[challengeIndex];
+
+    document.getElementById("answer").style.display =
+        "none";
+});
+
+document.getElementById("showAnswerButton")
+.addEventListener("click",function(){
+
+    if(!currentAction){
+        return;
+    }
+
+    let answer = "";
+
+    if(challengeIndex === 0){
+        answer = currentSentence;
+    }
+
+    if(challengeIndex === 1){
+        answer = currentQuestion;
+    }
+
+    if(challengeIndex === 2){
+        answer = currentNegative;
+    }
+
+    if(challengeIndex === 3){
+        answer =
+            "Talk about: " +
+            currentSentence +
+            " — Add more details!";
+    }
+
+    const answerElement =
+        document.getElementById("answer");
+
+    answerElement.textContent = answer;
+    answerElement.style.display = "block";
+});
 
 document.getElementById("timerButton")
 .addEventListener("click",function(){
@@ -543,34 +947,66 @@ document.getElementById("timerButton")
                 "⏱️ START 30s";
 
             document.getElementById("challenge").textContent =
-                "⏰ Time is up!";
-
+                "⏰ TIME'S UP!";
         }
 
     },1000);
-
 });
 
-let scoreA = 0;
-let scoreB = 0;
-
-function addScore(team){
+function addScore(team,amount){
 
     if(team === "A"){
-        scoreA++;
-        document.getElementById("scoreA").textContent = scoreA;
+        scoreA += amount;
+
+        if(scoreA < 0) scoreA = 0;
+
+        document.getElementById("scoreA").textContent =
+            scoreA;
     }
 
     if(team === "B"){
-        scoreB++;
-        document.getElementById("scoreB").textContent = scoreB;
+        scoreB += amount;
+
+        if(scoreB < 0) scoreB = 0;
+
+        document.getElementById("scoreB").textContent =
+            scoreB;
     }
 }
+
+document.getElementById("finishButton")
+.addEventListener("click",function(){
+
+    const winner =
+        document.getElementById("winner");
+
+    document.getElementById("finalScore").innerHTML =
+        "<strong>TEAM A:</strong> " +
+        scoreA +
+        " &nbsp;&nbsp; | &nbsp;&nbsp; " +
+        "<strong>TEAM B:</strong> " +
+        scoreB;
+
+    winner.style.display = "block";
+
+    winner.scrollIntoView({
+        behavior:"smooth"
+    });
+});
 
 document.getElementById("resetButton")
 .addEventListener("click",function(){
 
     clearInterval(timerInterval);
+
+    currentSubject = "";
+    currentAction = null;
+    currentActivity = "";
+
+    scoreA = 0;
+    scoreB = 0;
+
+    time = 30;
 
     document.getElementById("subject").textContent = "?";
     document.getElementById("verb").textContent = "?";
@@ -582,19 +1018,21 @@ document.getElementById("resetButton")
     document.getElementById("challenge").textContent =
         "Roll the dice to start!";
 
-    time = 30;
+    document.getElementById("answer").style.display =
+        "none";
+
+    document.getElementById("answer").textContent = "";
 
     document.getElementById("timer").textContent = "30";
-
-    document.getElementById("timerButton").textContent =
-        "⏱️ START 30s";
-
-    scoreA = 0;
-    scoreB = 0;
 
     document.getElementById("scoreA").textContent = "0";
     document.getElementById("scoreB").textContent = "0";
 
+    document.getElementById("timerButton").textContent =
+        "⏱️ START 30s";
+
+    document.getElementById("winner").style.display =
+        "none";
 });
 
 </script>
