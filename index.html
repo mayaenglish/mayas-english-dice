@@ -404,190 +404,534 @@ const subjects = [
 ];
 
 /*
-   Each verb is permanently paired with natural activities.
-   This prevents impossible combinations such as:
-   "study breakfast" or "wash football".
+Each activity is represented by a function.
+This allows possessive pronouns to automatically
+change according to the subject.
 */
+
 const actions = [
+
     {
         verb:"get up",
-        present:"get up",
         past:"got up",
-        activities:[
-            "early in the morning"
-        ]
+        activity: s => "early in the morning"
     },
+
     {
         verb:"brush",
-        present:"brush",
         past:"brushed",
-        activities:[
-            "my teeth"
-        ]
+        activity: s => possessive(s) + " teeth"
     },
+
     {
         verb:"take",
-        present:"take",
         past:"took",
-        activities:[
-            "a shower"
-        ]
+        activity: s => "a shower"
     },
+
     {
         verb:"have",
-        present:"have",
         past:"had",
-        activities:[
+        activity: s => randomFrom([
             "breakfast",
             "lunch",
             "dinner"
-        ]
+        ])
     },
+
     {
         verb:"eat",
-        present:"eat",
         past:"ate",
-        activities:[
+        activity: s => randomFrom([
             "breakfast",
             "lunch",
             "dinner",
-            "fruit"
-        ]
+            "fruit",
+            "a snack"
+        ])
     },
+
     {
         verb:"drink",
-        present:"drink",
         past:"drank",
-        activities:[
+        activity: s => randomFrom([
             "water",
             "milk",
-            "juice"
-        ]
+            "juice",
+            "tea"
+        ])
     },
+
     {
         verb:"go to",
-        present:"go to",
         past:"went to",
-        activities:[
+        activity: s => randomFrom([
             "school",
             "the library",
             "the market",
             "the park"
-        ]
+        ])
     },
+
     {
         verb:"study",
-        present:"study",
         past:"studied",
-        activities:[
+        activity: s => randomFrom([
             "English",
             "mathematics",
             "science",
-            "history"
-        ]
+            "history",
+            "geography"
+        ])
     },
+
     {
         verb:"read",
-        present:"read",
         past:"read",
-        activities:[
+        activity: s => randomFrom([
             "a book",
             "a novel",
-            "a magazine"
-        ]
+            "a magazine",
+            "an article"
+        ])
     },
+
     {
         verb:"write",
-        present:"write",
         past:"wrote",
-        activities:[
+        activity: s => randomFrom([
             "an email",
             "a story",
-            "a journal"
-        ]
+            "a journal",
+            "a short paragraph"
+        ])
     },
+
     {
         verb:"do",
-        present:"do",
         past:"did",
-        activities:[
+        activity: s => randomFrom([
             "homework",
             "housework",
             "exercise"
-        ]
+        ])
     },
+
     {
         verb:"play",
-        present:"play",
         past:"played",
-        activities:[
+        activity: s => randomFrom([
             "football",
             "badminton",
             "basketball",
             "volleyball"
-        ]
+        ])
     },
+
     {
         verb:"watch",
-        present:"watch",
         past:"watched",
-        activities:[
+        activity: s => randomFrom([
             "TV",
             "a movie",
-            "a video"
-        ]
+            "a video",
+            "a documentary"
+        ])
     },
+
     {
         verb:"listen to",
-        present:"listen to",
         past:"listened to",
-        activities:[
+        activity: s => randomFrom([
             "music",
             "a podcast",
             "the radio"
-        ]
+        ])
     },
+
     {
         verb:"clean",
-        present:"clean",
         past:"cleaned",
-        activities:[
-            "my bedroom",
-            "the house",
-            "the classroom"
-        ]
+        activity: s => possessive(s) + " bedroom"
     },
+
     {
         verb:"wash",
-        present:"wash",
         past:"washed",
-        activities:[
+        activity: s => randomFrom([
+            possessive(s) + " hands",
+            possessive(s) + " clothes",
             "the dishes",
-            "my clothes",
             "the car"
-        ]
+        ])
     },
+
     {
         verb:"help",
-        present:"help",
         past:"helped",
-        activities:[
-            "my parents",
-            "my friends",
-            "my teacher"
-        ]
+        activity: s => randomFrom([
+            possessive(s) + " parents",
+            possessive(s) + " friends",
+            "the teacher",
+            "classmates"
+        ])
     },
+
     {
         verb:"cook",
-        present:"cook",
         past:"cooked",
-        activities:[
-            "dinner",
+        activity: s => randomFrom([
             "breakfast",
-            "lunch"
-        ]
+            "lunch",
+            "dinner"
+        ])
+    },
+
+    {
+        verb:"wear",
+        past:"wore",
+        activity: s => possessive(s) + " school uniform"
+    },
+
+    {
+        verb:"carry",
+        past:"carried",
+        activity: s => possessive(s) + " backpack"
+    },
+
+    {
+        verb:"bring",
+        past:"brought",
+        activity: s => randomFrom([
+            "a notebook",
+            "a water bottle",
+            "an umbrella"
+        ])
+    },
+
+    {
+        verb:"take",
+        past:"took",
+        activity: s => "notes"
+    },
+
+    {
+        verb:"practice",
+        past:"practiced",
+        activity: s => randomFrom([
+            "English speaking",
+            "pronunciation",
+            "a presentation",
+            "a dialogue"
+        ])
+    },
+
+    {
+        verb:"prepare",
+        past:"prepared",
+        activity: s => randomFrom([
+            "breakfast",
+            "lunch",
+            "dinner",
+            "a presentation"
+        ])
+    },
+
+    {
+        verb:"check",
+        past:"checked",
+        activity: s => randomFrom([
+            possessive(s) + " messages",
+            possessive(s) + " homework",
+            "the schedule"
+        ])
+    },
+
+    {
+        verb:"join",
+        past:"joined",
+        activity: s => randomFrom([
+            "a school activity",
+            "a club",
+            "a study group"
+        ])
+    },
+
+    {
+        verb:"visit",
+        past:"visited",
+        activity: s => randomFrom([
+            possessive(s) + " grandparents",
+            "a friend",
+            "a relative"
+        ])
+    },
+
+    {
+        verb:"feed",
+        past:"fed",
+        activity: s => possessive(s) + " pet"
+    },
+
+    {
+        verb:"water",
+        past:"watered",
+        activity: s => "the plants"
+    },
+
+    {
+        verb:"organize",
+        past:"organized",
+        activity: s => randomFrom([
+            possessive(s) + " desk",
+            possessive(s) + " books",
+            "the classroom"
+        ])
+    },
+
+    {
+        verb:"draw",
+        past:"drew",
+        activity: s => randomFrom([
+            "a picture",
+            "a poster",
+            "a diagram"
+        ])
+    },
+
+    {
+        verb:"send",
+        past:"sent",
+        activity: s => randomFrom([
+            "an email",
+            "a message",
+            "a file"
+        ])
+    },
+
+    {
+        verb:"borrow",
+        past:"borrowed",
+        activity: s => randomFrom([
+            "a book",
+            "a pen",
+            "a dictionary"
+        ])
+    },
+
+    {
+        verb:"return",
+        past:"returned",
+        activity: s => randomFrom([
+            "a book",
+            "a dictionary",
+            "a library book"
+        ])
+    },
+
+    {
+        verb:"answer",
+        past:"answered",
+        activity: s => randomFrom([
+            "a question",
+            "the teacher's question",
+            "a quiz"
+        ])
+    },
+
+    {
+        verb:"ask",
+        past:"asked",
+        activity: s => randomFrom([
+            "a question",
+            "the teacher",
+            "a friend"
+        ])
+    },
+
+    {
+        verb:"discuss",
+        past:"discussed",
+        activity: s => randomFrom([
+            "a lesson",
+            "a problem",
+            "a school project"
+        ])
+    },
+
+    {
+        verb:"share",
+        past:"shared",
+        activity: s => randomFrom([
+            "an idea",
+            "a story",
+            "an opinion"
+        ])
+    },
+
+    {
+        verb:"use",
+        past:"used",
+        activity: s => randomFrom([
+            "a computer",
+            "a dictionary",
+            "the internet"
+        ])
+    },
+
+    {
+        verb:"make",
+        past:"made",
+        activity: s => randomFrom([
+            "a poster",
+            "a presentation",
+            "a plan",
+            "a sandwich"
+        ])
+    },
+
+    {
+        verb:"visit",
+        past:"visited",
+        activity: s => randomFrom([
+            "the library",
+            "a museum",
+            "a park",
+            "a relative"
+        ])
+    },
+
+    {
+        verb:"exercise",
+        past:"exercised",
+        activity: s => randomFrom([
+            "in the morning",
+            "after school",
+            "at the weekend"
+        ])
+    },
+
+    {
+        verb:"walk",
+        past:"walked",
+        activity: s => randomFrom([
+            "to school",
+            "in the park",
+            "around the neighborhood"
+        ])
+    },
+
+    {
+        verb:"ride",
+        past:"rode",
+        activity: s => randomFrom([
+            "a bicycle",
+            "a motorcycle",
+            "a bus"
+        ])
+    },
+
+    {
+        verb:"meet",
+        past:"met",
+        activity: s => randomFrom([
+            "a friend",
+            "classmates",
+            "a teacher"
+        ])
+    },
+
+    {
+        verb:"talk to",
+        past:"talked to",
+        activity: s => randomFrom([
+            "a friend",
+            "classmates",
+            "a teacher",
+            "parents"
+        ])
     }
+
 ];
+
+function randomIndex(length){
+    return Math.floor(Math.random() * length);
+}
+
+function randomFrom(array){
+    return array[randomIndex(array.length)];
+}
+
+function possessive(subject){
+
+    const map = {
+        "I":"my",
+        "You":"your",
+        "We":"our",
+        "They":"their",
+        "He":"his",
+        "She":"her"
+    };
+
+    return map[subject];
+}
+
+function getPresentVerb(subject,verb){
+
+    if(subject !== "He" && subject !== "She"){
+        return verb;
+    }
+
+    const forms = {
+
+        "get up":"gets up",
+        "brush":"brushes",
+        "take":"takes",
+        "have":"has",
+        "eat":"eats",
+        "drink":"drinks",
+        "go to":"goes to",
+        "study":"studies",
+        "read":"reads",
+        "write":"writes",
+        "do":"does",
+        "play":"plays",
+        "watch":"watches",
+        "listen to":"listens to",
+        "clean":"cleans",
+        "wash":"washes",
+        "help":"helps",
+        "cook":"cooks",
+        "wear":"wears",
+        "carry":"carries",
+        "bring":"brings",
+        "practice":"practices",
+        "prepare":"prepares",
+        "check":"checks",
+        "join":"joins",
+        "visit":"visits",
+        "feed":"feeds",
+        "water":"waters",
+        "organize":"organizes",
+        "draw":"draws",
+        "send":"sends",
+        "borrow":"borrows",
+        "return":"returns",
+        "answer":"answers",
+        "ask":"asks",
+        "discuss":"discusses",
+        "share":"shares",
+        "use":"uses",
+        "make":"makes",
+        "exercise":"exercises",
+        "walk":"walks",
+        "ride":"rides",
+        "meet":"meets",
+        "talk to":"talks to"
+    };
+
+    return forms[verb] || verb + "s";
+}
 
 let currentSubject = "";
 let currentAction = null;
@@ -614,52 +958,6 @@ const challenges = [
     "④ Speak about it for 30 seconds."
 ];
 
-function randomIndex(length){
-    return Math.floor(Math.random() * length);
-}
-
-function chooseDifferentIndex(length,previous){
-    if(length <= 1) return 0;
-
-    let index;
-
-    do{
-        index = randomIndex(length);
-    }while(index === previous);
-
-    return index;
-}
-
-function getPresentVerb(subject,verb){
-
-    if(subject !== "He" && subject !== "She"){
-        return verb;
-    }
-
-    const forms = {
-        "get up":"gets up",
-        "brush":"brushes",
-        "take":"takes",
-        "have":"has",
-        "eat":"eats",
-        "drink":"drinks",
-        "go to":"goes to",
-        "study":"studies",
-        "read":"reads",
-        "write":"writes",
-        "do":"does",
-        "play":"plays",
-        "watch":"watches",
-        "listen to":"listens to",
-        "clean":"cleans",
-        "wash":"washes",
-        "help":"helps",
-        "cook":"cooks"
-    };
-
-    return forms[verb] || verb + "s";
-}
-
 function buildSentence(){
 
     const tense =
@@ -668,18 +966,21 @@ function buildSentence(){
     let verb;
 
     if(tense === "present"){
+
         verb = getPresentVerb(
             currentSubject,
-            currentAction.present
+            currentAction.verb
         );
     }
 
     if(tense === "past"){
+
         verb = currentAction.past;
     }
 
     if(tense === "future"){
-        verb = "will " + currentAction.present;
+
+        verb = "will " + currentAction.verb;
     }
 
     currentSentence =
@@ -699,14 +1000,16 @@ function buildAnswers(){
         document.getElementById("tense").value;
 
     const baseVerb =
-        currentAction.present;
+        currentAction.verb;
 
     if(tense === "present"){
 
-        if(currentSubject === "I" ||
-           currentSubject === "You" ||
-           currentSubject === "We" ||
-           currentSubject === "They"){
+        if(
+            currentSubject === "I" ||
+            currentSubject === "You" ||
+            currentSubject === "We" ||
+            currentSubject === "They"
+        ){
 
             currentQuestion =
                 "Do " +
@@ -799,26 +1102,45 @@ function rollDice(){
 
     const animation = setInterval(function(){
 
-        const subjectIndex =
+        let subjectIndex =
             randomIndex(subjects.length);
 
-        const actionIndex =
+        let actionIndex =
             randomIndex(actions.length);
+
+        if(subjects.length > 1){
+
+            while(subjectIndex === previousSubjectIndex){
+                subjectIndex =
+                    randomIndex(subjects.length);
+            }
+        }
+
+        if(actions.length > 1){
+
+            while(actionIndex === previousActionIndex){
+                actionIndex =
+                    randomIndex(actions.length);
+            }
+        }
+
+        const subject =
+            subjects[subjectIndex];
 
         const action =
             actions[actionIndex];
 
-        const activityIndex =
-            randomIndex(action.activities.length);
+        const activity =
+            action.activity(subject);
 
         document.getElementById("subject").textContent =
-            subjects[subjectIndex];
+            subject;
 
         document.getElementById("verb").textContent =
-            action.present;
+            action.verb;
 
         document.getElementById("activity").textContent =
-            action.activities[activityIndex];
+            activity;
 
         count++;
 
@@ -833,9 +1155,9 @@ function rollDice(){
             previousSubjectIndex = subjectIndex;
             previousActionIndex = actionIndex;
 
-            currentSubject = subjects[subjectIndex];
+            currentSubject = subject;
             currentAction = action;
-            currentActivity = action.activities[activityIndex];
+            currentActivity = activity;
 
             buildSentence();
 
@@ -872,8 +1194,10 @@ document.getElementById("nextChallengeButton")
 .addEventListener("click",function(){
 
     if(!currentAction){
+
         document.getElementById("challenge").textContent =
             "Roll the dice first!";
+
         return;
     }
 
@@ -909,6 +1233,7 @@ document.getElementById("showAnswerButton")
     }
 
     if(challengeIndex === 3){
+
         answer =
             "Talk about: " +
             currentSentence +
@@ -929,45 +1254,53 @@ document.getElementById("timerButton")
 
     time = 30;
 
-    document.getElementById("timer").textContent = time;
+    document.getElementById("timer").textContent =
+        time;
 
-    this.textContent = "⏱️ RUNNING...";
+    this.textContent =
+        "⏱️ RUNNING...";
 
-    timerInterval = setInterval(function(){
+    timerInterval =
+        setInterval(function(){
 
-        time--;
+            time--;
 
-        document.getElementById("timer").textContent = time;
+            document.getElementById("timer").textContent =
+                time;
 
-        if(time <= 0){
+            if(time <= 0){
 
-            clearInterval(timerInterval);
+                clearInterval(timerInterval);
 
-            document.getElementById("timerButton").textContent =
-                "⏱️ START 30s";
+                document.getElementById("timerButton").textContent =
+                    "⏱️ START 30s";
 
-            document.getElementById("challenge").textContent =
-                "⏰ TIME'S UP!";
-        }
+                document.getElementById("challenge").textContent =
+                    "⏰ TIME'S UP!";
+            }
 
-    },1000);
+        },1000);
 });
 
 function addScore(team,amount){
 
     if(team === "A"){
+
         scoreA += amount;
 
-        if(scoreA < 0) scoreA = 0;
+        if(scoreA < 0)
+            scoreA = 0;
 
         document.getElementById("scoreA").textContent =
             scoreA;
     }
 
     if(team === "B"){
+
         scoreB += amount;
 
-        if(scoreB < 0) scoreB = 0;
+        if(scoreB < 0)
+            scoreB = 0;
 
         document.getElementById("scoreB").textContent =
             scoreB;
@@ -987,7 +1320,8 @@ document.getElementById("finishButton")
         "<strong>TEAM B:</strong> " +
         scoreB;
 
-    winner.style.display = "block";
+    winner.style.display =
+        "block";
 
     winner.scrollIntoView({
         behavior:"smooth"
@@ -1002,6 +1336,9 @@ document.getElementById("resetButton")
     currentSubject = "";
     currentAction = null;
     currentActivity = "";
+
+    previousActionIndex = -1;
+    previousSubjectIndex = -1;
 
     scoreA = 0;
     scoreB = 0;
@@ -1021,12 +1358,17 @@ document.getElementById("resetButton")
     document.getElementById("answer").style.display =
         "none";
 
-    document.getElementById("answer").textContent = "";
+    document.getElementById("answer").textContent =
+        "";
 
-    document.getElementById("timer").textContent = "30";
+    document.getElementById("timer").textContent =
+        "30";
 
-    document.getElementById("scoreA").textContent = "0";
-    document.getElementById("scoreB").textContent = "0";
+    document.getElementById("scoreA").textContent =
+        "0";
+
+    document.getElementById("scoreB").textContent =
+        "0";
 
     document.getElementById("timerButton").textContent =
         "⏱️ START 30s";
